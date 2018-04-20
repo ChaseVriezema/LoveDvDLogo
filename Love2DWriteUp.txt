@@ -1,0 +1,69 @@
+﻿Chase Vriezema
+
+
+Engine: Love2D
+Time to complete: 3 - 5 hours
+Tools: VS Code, XCode 9.3, iPhone 6S Simulator
+Language: Lua
+
+
+Steps to get Love working
+1. Download the iOS source from https://love2d.org/
+2. DO NOT download the iOS frameworks also provided, as they will break the project if imported
+3. Unzip the iOS source file
+4. Go to -> love/platform/xcode/love.xcodeproj and open it
+5. Go to product -> scheme -> love-ios
+6. Select product -> scheme -> edit scheme
+7. Change the dropdown field from debug to release
+8. Build and run the project on a iphone simulator
+9. To run on a device add these steps
+10. Ensure you have both an iOS and Mac development profile
+11. Add both profiles to the project in the love-macOSX build settings and the love-ios build settings
+12. Build and run to the selected device
+
+
+Writing the code
+1. Create a new folder, in the folder create a conf.lua and main.lua file
+2. conf.lua is your configuration file, for setting things such as window dimensions
+3. Add “function love.conf(t)” and an “end” statement to conf.lua to properly set up the file. 
+4. Switch over the main.lua. This is required for the program to run, and will contain your load, draw, and update functions.
+5. Add these three functions to main.lua. Be sure to add an end statement after each one
+   1. function love.load()
+   2. function love.update(dt)
+   3. function love.draw()
+1. The load function is called once upon application startup. It is best used to initialize variables and load assets for your program.
+2. The update function is called every frame. The dt variable is the delta time between each frame, and is used to smooth out movement
+3. The draw function is called every frame, after the update function. Set the screen scale, color, and draw images and shapes to the screen here.
+
+
+Steps to get your build .lua files onto a device
+1. Shift click each file required in the project (this has to include main.lua)
+2. Compress the files into a zip folder, then change the extension on the folder from .zip to .love
+3. This should change your file into a love application- you can double click to run it right there on the computer.
+4. To run the simulator, drag and drop the .love file into the simulator (after the love-ios project has been run on the simulator)
+5. This will open up the love-ios application and run the game
+6. To run on a device, open the love.xcodeproj from step 5
+7. Go to build phases, and ensure your target is love-ios
+8. In the Copy Bundle Resources section, add your .love file. 
+9. Build and run to your device, the app should load immediately
+
+
+
+
+Personal Thoughts:
+Installation
+This is the part that took the longest for me, however both where due to personal error more so than the program itself. The instructions on the site worked perfectly when followed exactly as they are written, any minor deviations can throw off the entire process. The additional libraries found the site broke the project when imported over the ones it came with, so don’t download those. Once the project is built to the simulator, it provides an interface for you to load .love projects. 
+
+
+Writing the Code
+Lua is an easy language to pick up and write, and lua files can be written using any editor. Love provides a variety of useful baseline functions, such as drawing, updating, or getting the dimensions of the window. However, Love is intended to work across every platform, and it has issues when finding information such as screen size and scale. It doesn’t provide an easy way to calculate or find this information, so you can either utilize a third party library, or hard code it for a particular system. I hard coded my application for the iPhone 6s.
+
+
+Functionality wise the base libraries are very similar to Java graphics API, allowing drawing of rudimentary shapes or loading sprites.
+
+
+When creating a .love file, it is important that you shift-click each file you wish to add, and then compress it. Simply compressing the folder holding all your files will make the love framework unable to find your main.lua file, and therefore unable to run. Debugging the program was tedious, as after each code change your required to re-compress and run the .love file and drag it into the simulator.
+
+
+Deploying to Device
+Deploying the .love file to the iPhone was quite easy compared to the previous steps. Adding it to the build path for the application and building it to the iPhone worked perfectly on the first try.
